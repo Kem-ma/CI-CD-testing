@@ -1,5 +1,6 @@
 from aws_cdk import Stack
 from aws_cdk.pipelines import CodePipeline, CodePipelineSource, ShellStep
+from ci_cd_testing.pipeline_stage import PipelineStage
 from constructs import Construct
 
 class CiCdTestingStack(Stack):
@@ -19,3 +20,7 @@ class CiCdTestingStack(Stack):
                 ]
             ),
         )
+
+        self.pipeline.add_stage(PipelineStage(self, "PipelineDevStage", stage_name="dev"))
+
+        self.pipeline.add_stage(PipelineStage(self, "PipelineProdStage", stage_name="prod"))
